@@ -295,4 +295,81 @@ Load context: Final manuscript + research framework
 
 ---
 
+## Core Features and Technologies
+
+This section provides a detailed overview of Genesis-Tool's core technical features and their benefits.
+
+### 1. Zero-Access Encryption
+
+Your conversations are encrypted with YOUR password using industry-standard cryptography (PBKDF2 + Fernet).  
+The architecture is designed to prevent server operator access to plaintext data.
+
+**Key benefit:** Privacy-first architecture with client-side key derivation. See [DISCLAIMER.md](../../DISCLAIMER.md) for security limitations and user responsibilities.
+
+### 2. Automatic Branching ("Chat-Multiverse")
+
+Edit any past message with `@edit <position> <text>` → Genesis automatically creates a parallel timeline.
+Explore "what if" scenarios without losing the original conversation, or create new, focused branches that carry only the relevant context forward. This is powered by block-filtered branching, allowing you to distill a single topic from a complex discussion.
+
+**Auto-Branching Triggers:**
+- **On Edit (always):** `@edit 3 Tell me about dogs` → Creates branch "main-edit-msg3"
+- **On Summary (optional, configurable):** `@sum` → Can create new branch or stay in same chat (user-configurable via `@settings`)
+  - **With branching:** Choose context window (0 to N Q&A pairs) → Creates focused summary branch
+  - **Without branching:** Summary added to current chat, all messages kept (non-destructive)
+
+**Key benefit:** Fearless editing—history is always preserved, alternatives are always explorable.
+
+### 3. Cross-Session Topic Search
+
+Search: "JWT authentication" → Find ALL relevant message-pairs across months of conversations.  
+Aggregate results into a new focused branch.
+
+**Key benefit:** Your knowledge persists indefinitely with semantic connections across time.
+
+### 4. Smart Summarization & Knowledge Integration
+
+AI-generated summaries aren't just for compressing context; they are automatically saved as persistent items in your **Sanctuary** (persistent knowledge storage). Any summary can then be loaded as context into a completely different conversation, creating a continuous loop of knowledge refinement and reuse.
+
+**Context Window Control:** When creating summary branches, choose how many Q&A pairs to keep (0 to N). This enables:
+- **Focused summaries:** Keep only last 2 pairs for clean slate
+- **Full context:** Keep all pairs for complete history
+- **Hierarchical compression:** AI sees old summaries (iterative refinement)
+
+**Transclusion Philosophy:** Summaries are not automatically copied to new branches. Instead, users manually load them via the Sanctuary (future UI: drag-drop "Context as Lego Blocks").
+
+**Key benefit:** Transforms messy conversations into clean, reusable knowledge assets that compound in value over time.
+
+### 5. Visual Knowledge Navigation
+
+Conversations organized as semantic mindmaps (thematic blocks).  
+See relationships, not just chronological lists.
+
+**Key benefit:** A structured knowledge graph for precise navigation—no more endless scrolling.
+
+### 6. Document Versioning
+
+Full version history tracking for all documents with automatic versioning.  
+Every change creates a new version while preserving the complete history.
+
+**Key features:**
+- **Automatic versioning:** Every document update creates a new version
+- **Version history:** Access any previous version at any time
+- **Non-destructive:** Original versions are never deleted
+- **Rollback support:** Restore any previous version if needed
+
+**Key benefit:** Never lose work, track changes over time, experiment fearlessly.
+
+### 7. User-Friendly Configuration
+
+Unified `@settings` menu for all configuration:
+- **AI Model & Privacy:** Choose between cloud providers (e.g., Gemini, Claude, GPT) or local AI (e.g., Ollama) in one menu
+- **Summary Behavior:** Configure whether summaries create new branches or stay in same chat
+- **Advanced Settings:** Customize prompts, tags, and topics for your workflow
+
+**Note:** Provider names (Gemini, Claude, GPT, Ollama) are mentioned for technical reference only and do not constitute endorsement, comparison, or affiliation. All trademarks remain the property of their respective owners. See [DISCLAIMER.md](../../DISCLAIMER.md) for trademark information.
+
+**Key benefit:** Simple, intuitive configuration without technical complexity—privacy and automation settings in one place.
+
+---
+
 

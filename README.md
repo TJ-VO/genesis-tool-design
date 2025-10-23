@@ -156,16 +156,6 @@ Genesis-Tool uses a **knowledge-graph architecture** with **zero-access encrypti
 
 ---
 
-### The Problem
-
-Current AI tools have three critical barriers preventing mainstream adoption:
-
-1. **❌ Non-intuitive interfaces:** Linear chat doesn't match how humans think
-2. **❌ No knowledge management:** Conversations are ephemeral and unstructured  
-3. **❌ Privacy concerns:** User data often stored on third-party servers without encryption
-
-**Result:** Despite their power, generative AI tools have not yet become a daily utility for the vast majority of people. The initial hype has given way to the challenge of practical, real-world integration.
-
 ### The Solution: 3-Layer Architecture
 
 Genesis organizes AI interactions into **3 hierarchical layers** - each serving a distinct purpose in the knowledge workflow (see the [3-layer architecture diagram](#-what-is-genesis-tool) above):
@@ -185,269 +175,6 @@ Genesis organizes AI interactions into **3 hierarchical layers** - each serving 
 
 ---
 
-## 🚀 Core Features and Technologies
-
-### 1. Zero-Access Encryption
-Your conversations are encrypted with YOUR password using industry-standard cryptography (PBKDF2 + Fernet).  
-The architecture is designed to prevent server operator access to plaintext data.
-
-**Key benefit:** Privacy-first architecture with client-side key derivation. See [DISCLAIMER.md](DISCLAIMER.md) for security limitations and user responsibilities.
-
-### 2. Automatic Branching ("Chat-Multiverse")
-Edit any past message with `@edit <position> <text>` → Genesis automatically creates a parallel timeline.
-Explore "what if" scenarios without losing the original conversation, or create new, focused branches that carry only the relevant context forward. This is powered by block-filtered branching, allowing you to distill a single topic from a complex discussion.
-
-**Auto-Branching Triggers:**
-- **On Edit (always):** `@edit 3 Tell me about dogs` → Creates branch "main-edit-msg3"
-- **On Summary (optional, configurable):** `@sum` → Can create new branch or stay in same chat (user-configurable via `@settings`)
-  - **With branching:** Choose context window (0 to N Q&A pairs) → Creates focused summary branch
-  - **Without branching:** Summary added to current chat, all messages kept (non-destructive)
-
-**Key benefit:** Fearless editing—history is always preserved, alternatives are always explorable.
-
-### 3. Cross-Session Topic Search
-Search: "JWT authentication" → Find ALL relevant message-pairs across months of conversations.  
-Aggregate results into a new focused branch.
-
-**Key benefit:** Your knowledge persists indefinitely with semantic connections across time.
-
-### 4. Smart Summarization & Knowledge Integration
-AI-generated summaries aren't just for compressing context; they are automatically saved as persistent items in your **Sanctuary** (persistent knowledge storage). Any summary can then be loaded as context into a completely different conversation, creating a continuous loop of knowledge refinement and reuse.
-
-**Context Window Control:** When creating summary branches, choose how many Q&A pairs to keep (0 to N). This enables:
-- **Focused summaries:** Keep only last 2 pairs for clean slate
-- **Full context:** Keep all pairs for complete history
-- **Hierarchical compression:** AI sees old summaries (iterative refinement)
-
-**Transclusion Philosophy:** Summaries are not automatically copied to new branches. Instead, users manually load them via the Sanctuary (future UI: drag-drop "Context as Lego Blocks").
-
-**Key benefit:** Transforms messy conversations into clean, reusable knowledge assets that compound in value over time.
-
-### 5. Visual Knowledge Navigation
-Conversations organized as semantic mindmaps (thematic blocks).  
-See relationships, not just chronological lists.
-
-**Key benefit:** A structured knowledge graph for precise navigation—no more endless scrolling.
-
-### 6. Document Versioning
-Full version history tracking for all documents with automatic versioning.  
-Every change creates a new version while preserving the complete history.
-
-**Key features:**
-- **Automatic versioning:** Every document update creates a new version
-- **Version history:** Access any previous version at any time
-- **Non-destructive:** Original versions are never deleted
-- **Rollback support:** Restore any previous version if needed
-
-**Key benefit:** Never lose work, track changes over time, experiment fearlessly.
-
-### 7. User-Friendly Configuration
-Unified `@settings` menu for all configuration:
-- **AI Model & Privacy:** Choose between cloud providers (e.g., Gemini, Claude, GPT) or local AI (e.g., Ollama) in one menu
-- **Summary Behavior:** Configure whether summaries create new branches or stay in same chat
-- **Advanced Settings:** Customize prompts, tags, and topics for your workflow
-
-**Note:** Provider names (Gemini, Claude, GPT, Ollama) are mentioned for technical reference only and do not constitute endorsement, comparison, or affiliation. All trademarks remain the property of their respective owners. See [DISCLAIMER.md](DISCLAIMER.md) for trademark information.
-
-**Key benefit:** Simple, intuitive configuration without technical complexity—privacy and automation settings in one place.
-
----
-
-## 📚 Documentation
-
-### Core Documents
-- **[Design Rationale](competitive-differentiation.md)** – Market positioning and architecture paradigms
-- **[Code Samples](code-samples.md)** – 5 code examples from Backend MVP 1.0
-- **[Quality Philosophy](quality-philosophy.md)** – Why quality over quantity matters
-
-### UI/UX Features
-- **[Architecture Overview](features/01-architecture/overview.md)** – 3-layer architecture (Sanctuary, Genesis Deck, Community)
-- **[Sanctuary](features/02-sanctuary/overview.md)** – Persistent knowledge treasury
-- **[Genesis Deck](features/03-genesis-deck/overview.md)** – Where knowledge is created (3 modes)
-- **[Community Deck](features/04-community/overview.md)** – Global knowledge network
-- **[Transclusion Concept](features/02-sanctuary/transclusion.md)** – "Context as Lego Blocks"
-- **[Multi-Agent Canvas](features/03-genesis-deck/refine-mode/multi-agent-canvas.md)** – Refine Mode workflow orchestration
-- **[All Features](features/)** – Complete UI/UX feature documentation
-
----
-
-## 💼 Real-World Workflow: End-to-End Example
-
-**Scenario:** You are a scientific researcher preparing a comprehensive literature review for an academic publication on climate change adaptation strategies. Here's how the Decks work together to support your research workflow:
-
-### 📍 Research Deck: Systematic Fact Gathering
-**Goal:** Systematically collect academic sources and key findings
-
-```
-Research Session: "Climate Adaptation Strategies - Urban Areas"
-
-├─ 📜 Primary Research Papers
-│   ├─ Smith et al. (2023) - Nature Climate Change
-│   │   └─ Key findings + DOI link
-│   ├─ Chen & Wang (2022) - Science
-│   └─ Rodriguez et al. (2024) - Environmental Research Letters
-│
-├─ 📊 Meta-Analyses
-│   ├─ IPCC AR6 Working Group II (2022)
-│   │   └─ Chapter 6: Cities and Settlements
-│   ├─ Systematic Review: Urban Heat Islands (2023)
-│   └─ Global Adaptation Database Analysis (2024)
-│
-├─ 📚 Theoretical Frameworks
-│   └─ Resilience Theory in Urban Planning
-│       └─ Holling (1973) + Walker et al. (2004)
-│
-└─ 🔎 Adjacent Topics
-    ├─ Green infrastructure effectiveness metrics
-    └─ Cost-benefit analysis methodologies
-```
-
-**Output:** Structured literature dossier with source references  
-**UI:** Left panel shows source tree, right panel displays selected source with timeline
-
----
-
-### 📍 Sanctuary: Persistent Knowledge Storage
-**Goal:** Save reusable knowledge building blocks
-
-```
-Inventory:
-
-├─ Item 1: "Urban Heat Island Mitigation - Key Strategies"
-│   Type: research_summary
-│   Tags: [climate, urban_planning, heat_mitigation]
-│   Content: "Three primary strategies identified across 45 studies:
-│             1. Green roofs (avg. 2-4°C reduction)
-│             2. Urban tree canopy (3-7°C reduction)
-│             3. Cool pavements (1-3°C reduction)..."
-│   Source: Research Session #123
-│
-├─ Item 2: "Resilience Framework - Holling & Walker Synthesis"
-│   Type: theoretical_framework
-│   Tags: [theory, resilience, urban_systems]
-│   Content: "Four key principles: 1. Adaptive capacity, 2. Redundancy..."
-│   Source: Research Session #123
-│
-└─ Item 3: "Methodology Checklist: Climate Adaptation Reviews"
-    Type: methodology
-    Tags: [methods, systematic_review, best_practices]
-    Content: "1. Define search terms, 2. Database selection, 3. Inclusion criteria..."
-    Source: Synthesized from Research Session #123
-```
-
-**Output:** Reusable, encrypted, tagged knowledge blocks  
-**Benefit:** Reference these in future research projects without re-reading
-
----
-
-### 📍 Refine Mode: Iterative Document Refinement
-**Goal:** Create academically rigorous, well-structured manuscript
-
-```
-Document: "Literature Review - Urban Climate Adaptation Strategies"
-
-Iteration 1: Draft
-├─ Writer Agent: Creates first draft based on Research + Knowledge
-└─ Feedback: "Good structure, but lacks critical analysis"
-
-Iteration 2: Critical Analysis
-├─ Writer Agent: Adds comparative analysis and research gaps
-├─ Critic 1 (Methodology): "Sample size reporting inconsistent"
-└─ Critic 2 (Structure): "Results section too descriptive"
-
-Iteration 3: Academic Rigor
-├─ Writer Agent: Standardizes reporting, adds analytical depth
-├─ Critic 1 (Methodology): ✅ "Methodologically sound"
-├─ Critic 2 (Structure): ✅ "Well-organized and analytical"
-└─ Critic 3 (Citations): "Consider adding recent 2024 studies"
-
-Final Draft: ✅ Ready for submission
-```
-
-**Output:** Academically rigorous, iteratively refined manuscript  
-**UI:** Left panel shows iteration stack, right panel shows current document version
-
----
-
-### 📍 Create Mode: Exploratory Research Discussion
-**Goal:** Explore research questions with full context
-
-```
-Chat Session: "Research Gap Analysis and Next Steps"
-
-User: "What are the main research gaps in this field?"
-
-[CONTEXT loaded from Sanctuary:
- - "Literature Review Final Draft"
- - "Urban Heat Island Mitigation Strategies"  
- - "Resilience Framework Synthesis"]
-
-AI: "Based on the 67 papers reviewed, three significant gaps emerge:
-     
-     1. **Temporal Analysis:** Most studies focus on single-year data.
-        Only 12% examine adaptation effectiveness over 5+ years.
-        
-     2. **Socioeconomic Factors:** Limited research on equity implications.
-        Only 8 studies explicitly address vulnerable populations.
-        
-     3. **Multi-Strategy Interactions:** Few studies examine synergies
-        between green infrastructure + policy interventions.
-     
-     Potential research directions:
-     - Longitudinal study tracking adaptation outcomes (5-10 years)
-     - Mixed-methods approach combining quantitative metrics + 
-       qualitative community impact assessment..."
-
-User: @branch "What methodology would work for longitudinal study?"
-└─ Branch: Methodology Design
-    └─ AI additionally loads: "Methodology Checklist - Best Practices"
-        └─ Detailed methodological discussion with examples
-```
-
-**Output:** Research planning based on comprehensive literature analysis  
-**UI:** Mindmap visualization showing research branches
-
----
-
-### 🔄 The Complete Loop
-
-```
-┌─────────────┐
-│  RESEARCH   │  Gather sources + track citations
-│  📚 📊 🔍   │  (Papers, data, frameworks)
-└──────┬──────┘
-       │ Save
-       ↓
-┌─────────────┐
-│  KNOWLEDGE  │  Persistent + Tagged + Encrypted
-│  📦 📋 🏷️   │  (Reusable research blocks)
-└──────┬──────┘
-       │ Load
-       ↓
-┌─────────────┐
-│   QUALITY   │  Write manuscript + Iterate
-│  ✍️ 🔄 ✅   │  (Multi-agent critique)
-└──────┬──────┘
-       │ Reference
-       ↓
-┌─────────────┐
-│    CHAT     │  Research planning with context
-│  💬 🌳 🤔   │  (Branches for methodologies)
-└─────────────┘
-       │
-       └──────→ Back to RESEARCH (new questions)
-```
-
-**Key Benefits:**
-- ✅ **Separation of Concerns:** Each cognitive mode has its own optimized interface
-- ✅ **Optional Persistence:** User decides what to save, tag, and retrieve
-- ✅ **User Sovereignty:** All data encrypted locally, full control over deletion
-- ✅ **Traceable Sources:** Full citation chain from source to final manuscript
-
-**Other Use Cases:** Business strategy analysis, product development research, investigative journalism, educational content creation, technical documentation.
-
----
-
 ## 🎯 Genesis-Tool's Approach
 
 Genesis-Tool is an **"AI Conversation Workbench"** – combining persistent memory, automatic branching, zero-access encryption, and AI-native design in a single cohesive system.
@@ -460,30 +187,6 @@ Genesis-Tool is an **"AI Conversation Workbench"** – combining persistent memo
 - ✅ **Cross-Session Search:** Find knowledge across months of conversations
 
 This represents a **different approach** to AI interaction, focusing on structured, long-term knowledge accumulation with privacy-first architecture.
-
----
-
-## 🌍 Why Open Source?
-
-Genesis-Tool is built on a fundamental belief: AI tools should empower users, not exploit them.
-
-**Core principles:**
-
-1. **Privacy requires transparency**  
-   Zero-access encryption is only meaningful if the approach can be verified and understood.
-
-2. **Knowledge belongs to its creator**  
-   Your conversations and insights remain yours – exportable, future-proof, with no vendor lock-in.
-
-3. **Collaboration drives innovation**  
-   Open-source ensures that improvements benefit the entire community.
-
-**This design documentation is open-source:**
-- Design specifications: CC-BY-SA 4.0 (freely shareable and remixable)
-- Code samples: AGPL-3.0 (ensuring transparency)
-- Backend/Frontend: License terms will be announced when released publicly
-
-Genesis-Tool demonstrates that AI tools can prioritize user privacy and control without sacrificing functionality.
 
 ---
 
@@ -511,6 +214,21 @@ Genesis-Tool demonstrates that AI tools can prioritize user privacy and control 
 
 ---
 
+## 📚 Explore the Full Documentation
+
+This README provides a high-level overview. For detailed specifications, use cases, and technical deep-dives, see the complete documentation index:
+
+**[➡️ Full Documentation Index](./index.md)**
+
+The index is organized by audience (Developers, Investors, Designers, End Users) and includes:
+- Detailed architecture specifications
+- UI/UX feature designs
+- Real-world use cases and workflows
+- Technical implementation examples
+- Future vision and roadmap
+
+---
+
 ## 👤 Author
 
 **TJ-VO**  
@@ -530,30 +248,6 @@ Code samples embedded within this documentation are licensed under **AGPL-3.0** 
 
 See [LICENSE-DOCS](LICENSE-DOCS) for documentation license and [LICENSE](LICENSE) for code sample license.
 
-
----
-
-## 📚 Learn More
-
-Explore detailed documentation for each aspect of Genesis-Tool:
-
-### **Design Specifications**
-- **[features/](features/)** - Detailed UI/UX feature specifications:
-  - [Architecture Overview](features/01-architecture/overview.md) - 3-layer architecture
-  - [Sanctuary](features/02-sanctuary/overview.md) - Persistent knowledge treasury
-  - [Genesis Deck](features/03-genesis-deck/overview.md) - Where knowledge is created (3 modes)
-  - [Community Deck](features/04-community/overview.md) - Global knowledge network
-  - [Knowledge Mindmap](features/02-sanctuary/visual-mindmap.md) - Visual knowledge navigation
-  - [Message Navigation](features/03-genesis-deck/create-mode/message-navigation.md) - VSCode-style minimap
-  - [Multi-Agent Canvas](features/03-genesis-deck/refine-mode/multi-agent-canvas.md) - Refine Mode workflow orchestration
-  - [Visual Branch Differentiation](features/03-genesis-deck/create-mode/visual-branch-differentiation.md) - Branch type visualization
-  - [Transclusion Concept](features/02-sanctuary/transclusion.md) - "Context as Lego Blocks"
-  - [Collaborative Workspaces](features/04-community/collaborative-workspaces.md) - Multi-user collaboration
-  - [Template System](features/05-workflows/template-system.md) - Predefined workflows
-
-### **Technical Deep Dive**
-- **[code-samples.md](code-samples.md)** - 5 code examples from Backend MVP 1.0
-- **[competitive-differentiation.md](competitive-differentiation.md)** - Market positioning and architecture paradigms
 
 ---
 
@@ -579,16 +273,6 @@ By publishing these concepts openly on GitHub with Git timestamps (initial publi
 - 3-layer architecture (Sanctuary, Genesis Deck with 3 modes, Community) **as integrated system design**
 
 **Note:** Individual features or concepts may exist in other tools or research. This documentation is published with the intent that these specific architectural combinations remain freely available for implementation and innovation.
-
----
-
----
-
-## 📖 Documentation
-
-- **[Features Directory](features/):** Detailed feature specifications and UI/UX designs
-- **[Design Philosophy](design-philosophy.md):** Our approach to scalability and future potential
-- **[Use Cases](features/07-validation/real-world-use-cases.md):** Real-world validation and examples
 
 ---
 

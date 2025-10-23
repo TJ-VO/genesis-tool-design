@@ -83,6 +83,187 @@ If you have a real-world use case that demonstrates Genesis-Tool's value:
 
 ---
 
+## Featured Use Case: Scientific Research Workflow
+
+**Scenario:** You are a scientific researcher preparing a comprehensive literature review for an academic publication on climate change adaptation strategies. Here's how the Decks work together to support your research workflow:
+
+### 📍 Research Deck: Systematic Fact Gathering
+
+**Goal:** Systematically collect academic sources and key findings
+
+```
+Research Session: "Climate Adaptation Strategies - Urban Areas"
+
+├─ 📜 Primary Research Papers
+│   ├─ Smith et al. (2023) - Nature Climate Change
+│   │   └─ Key findings + DOI link
+│   ├─ Chen & Wang (2022) - Science
+│   └─ Rodriguez et al. (2024) - Environmental Research Letters
+│
+├─ 📊 Meta-Analyses
+│   ├─ IPCC AR6 Working Group II (2022)
+│   │   └─ Chapter 6: Cities and Settlements
+│   ├─ Systematic Review: Urban Heat Islands (2023)
+│   └─ Global Adaptation Database Analysis (2024)
+│
+├─ 📚 Theoretical Frameworks
+│   └─ Resilience Theory in Urban Planning
+│       └─ Holling (1973) + Walker et al. (2004)
+│
+└─ 🔎 Adjacent Topics
+    ├─ Green infrastructure effectiveness metrics
+    └─ Cost-benefit analysis methodologies
+```
+
+**Output:** Structured literature dossier with source references  
+**UI:** Left panel shows source tree, right panel displays selected source with timeline
+
+---
+
+### 📍 Sanctuary: Persistent Knowledge Storage
+
+**Goal:** Save reusable knowledge building blocks
+
+```
+Inventory:
+
+├─ Item 1: "Urban Heat Island Mitigation - Key Strategies"
+│   Type: research_summary
+│   Tags: [climate, urban_planning, heat_mitigation]
+│   Content: "Three primary strategies identified across 45 studies:
+│             1. Green roofs (avg. 2-4°C reduction)
+│             2. Urban tree canopy (3-7°C reduction)
+│             3. Cool pavements (1-3°C reduction)..."
+│   Source: Research Session #123
+│
+├─ Item 2: "Resilience Framework - Holling & Walker Synthesis"
+│   Type: theoretical_framework
+│   Tags: [theory, resilience, urban_systems]
+│   Content: "Four key principles: 1. Adaptive capacity, 2. Redundancy..."
+│   Source: Research Session #123
+│
+└─ Item 3: "Methodology Checklist: Climate Adaptation Reviews"
+    Type: methodology
+    Tags: [methods, systematic_review, best_practices]
+    Content: "1. Define search terms, 2. Database selection, 3. Inclusion criteria..."
+    Source: Synthesized from Research Session #123
+```
+
+**Output:** Reusable, encrypted, tagged knowledge blocks  
+**Benefit:** Reference these in future research projects without re-reading
+
+---
+
+### 📍 Refine Mode: Iterative Document Refinement
+
+**Goal:** Create academically rigorous, well-structured manuscript
+
+```
+Document: "Literature Review - Urban Climate Adaptation Strategies"
+
+Iteration 1: Draft
+├─ Writer Agent: Creates first draft based on Research + Knowledge
+└─ Feedback: "Good structure, but lacks critical analysis"
+
+Iteration 2: Critical Analysis
+├─ Writer Agent: Adds comparative analysis and research gaps
+├─ Critic 1 (Methodology): "Sample size reporting inconsistent"
+└─ Critic 2 (Structure): "Results section too descriptive"
+
+Iteration 3: Academic Rigor
+├─ Writer Agent: Standardizes reporting, adds analytical depth
+├─ Critic 1 (Methodology): ✅ "Methodologically sound"
+├─ Critic 2 (Structure): ✅ "Well-organized and analytical"
+└─ Critic 3 (Citations): "Consider adding recent 2024 studies"
+
+Final Draft: ✅ Ready for submission
+```
+
+**Output:** Academically rigorous, iteratively refined manuscript  
+**UI:** Left panel shows iteration stack, right panel shows current document version
+
+---
+
+### 📍 Create Mode: Exploratory Research Discussion
+
+**Goal:** Explore research questions with full context
+
+```
+Chat Session: "Research Gap Analysis and Next Steps"
+
+User: "What are the main research gaps in this field?"
+
+[CONTEXT loaded from Sanctuary:
+ - "Literature Review Final Draft"
+ - "Urban Heat Island Mitigation Strategies"  
+ - "Resilience Framework Synthesis"]
+
+AI: "Based on the 67 papers reviewed, three significant gaps emerge:
+     
+     1. **Temporal Analysis:** Most studies focus on single-year data.
+        Only 12% examine adaptation effectiveness over 5+ years.
+        
+     2. **Socioeconomic Factors:** Limited research on equity implications.
+        Only 8 studies explicitly address vulnerable populations.
+        
+     3. **Multi-Strategy Interactions:** Few studies examine synergies
+        between green infrastructure + policy interventions.
+     
+     Potential research directions:
+     - Longitudinal study tracking adaptation outcomes (5-10 years)
+     - Mixed-methods approach combining quantitative metrics + 
+       qualitative community impact assessment..."
+
+User: @branch "What methodology would work for longitudinal study?"
+└─ Branch: Methodology Design
+    └─ AI additionally loads: "Methodology Checklist - Best Practices"
+        └─ Detailed methodological discussion with examples
+```
+
+**Output:** Research planning based on comprehensive literature analysis  
+**UI:** Mindmap visualization showing research branches
+
+---
+
+### 🔄 The Complete Loop
+
+```
+┌─────────────┐
+│  RESEARCH   │  Gather sources + track citations
+│  📚 📊 🔍   │  (Papers, data, frameworks)
+└──────┬──────┘
+       │ Save
+       ↓
+┌─────────────┐
+│  KNOWLEDGE  │  Persistent + Tagged + Encrypted
+│  📦 📋 🏷️   │  (Reusable research blocks)
+└──────┬──────┘
+       │ Load
+       ↓
+┌─────────────┐
+│   QUALITY   │  Write manuscript + Iterate
+│  ✍️ 🔄 ✅   │  (Multi-agent critique)
+└──────┬──────┘
+       │ Reference
+       ↓
+┌─────────────┐
+│    CHAT     │  Research planning with context
+│  💬 🌳 🤔   │  (Branches for methodologies)
+└─────────────┘
+       │
+       └──────→ Back to RESEARCH (new questions)
+```
+
+**Key Benefits:**
+- ✅ **Separation of Concerns:** Each cognitive mode has its own optimized interface
+- ✅ **Optional Persistence:** User decides what to save, tag, and retrieve
+- ✅ **User Sovereignty:** All data encrypted locally, full control over deletion
+- ✅ **Traceable Sources:** Full citation chain from source to final manuscript
+
+**Other Use Cases:** Business strategy analysis, product development research, investigative journalism, educational content creation, technical documentation.
+
+---
+
 ## Use Case Categories
 
 ### 1. Legal Use Cases
