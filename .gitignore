@@ -1,0 +1,81 @@
+# Genesis-Tool-Documentation - Git Ignore File
+# CRITICAL: Prevents sensitive/private docs from being pushed to public repo
+
+# =============================================================================
+# PRIVATE DOCUMENTATION (NEVER COMMIT!)
+# =============================================================================
+
+# Private strategy docs
+*PRIVATE*.md
+*private*.md
+
+# Personal notes & strategy
+bewerbungsstrategie.md
+proton-pitch*.md
+personal-notes/
+job-search/
+
+# Project state files (may contain private strategy references)
+*Project-State*.md
+*project-state*.md
+Project-State_*.md
+
+# Temporary/work-in-progress
+*_WIP.md
+*_DRAFT.md
+scratch/
+temp/
+
+# =============================================================================
+# SYSTEM FILES
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =============================================================================
+# EDITOR FILES
+# =============================================================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# =============================================================================
+# OTHER
+# =============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Log files
+*.log
+
