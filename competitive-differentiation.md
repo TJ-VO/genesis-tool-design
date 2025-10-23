@@ -673,6 +673,464 @@ Result: Efficient, systematic improvement, user-in-the-loop
 
 ---
 
+## 6.5 Everyday Conversation Management: Architectural USPs
+
+### Beyond Basic Branching: Knowledge-Graph Architecture
+
+**The Evolution of Conversation Management:**
+
+Modern AI tools increasingly offer conversation branching—the ability to copy messages up to a certain point and continue in a new direction. This is a significant improvement over isolated sessions, but **basic branching** still treats conversations as linear sequences that can only be copied wholesale.
+
+Genesis' knowledge-graph architecture represents the next evolution: **intelligent, topic-aware branching** integrated with semantic search, automated topic extraction, and cross-session knowledge aggregation. The innovation isn't branching itself—it's the architectural integration that transforms branching from a "copy feature" into a knowledge management system.
+
+**This section examines the architectural trade-offs between basic branching and Genesis' knowledge-graph approach.**
+
+For concrete user scenarios demonstrating these architectural differences, see [Real-World Use Cases: Everyday Conversation Management](features/07-validation/real-world-use-cases.md#use-case-category-7-everyday-conversation-management).
+
+---
+
+### 6.5.1 Basic Branching vs. Knowledge-Graph Branching
+
+**What Basic Branching Provides:**
+
+Conventional branching (as seen in modern AI chat tools) allows users to:
+- Click on any message in a conversation
+- Create a new thread that copies all messages up to that point
+- Preserve the original conversation
+
+**What Basic Branching Lacks:**
+
+| Limitation | Impact | Why It Matters |
+|------------|--------|----------------|
+| **Linear copying only** | Must copy ALL messages up to point X | Cannot extract specific topics from mixed conversations |
+| **No topic awareness** | User manually identifies branch points | Misses natural topic boundaries, creates awkward splits |
+| **Flat organization** | Branches shown as list | No visual hierarchy, hard to navigate after multiple branches |
+| **No cross-session capability** | Each conversation isolated | Cannot aggregate related discussions from different sessions |
+| **String search only** | Finds exact text matches | Misses semantically related content with different terminology |
+| **No template mechanism** | Manual copy-paste for reuse | Repetitive setup for similar scenarios |
+
+**Genesis' Knowledge-Graph Branching:**
+
+| Feature | Basic Branching | Genesis Knowledge-Graph Branching | Architectural Reason |
+|---------|-----------------|-----------------------------------|---------------------|
+| **Branch Point Selection** | Manual only (click message) | Manual OR AI-suggested (topic shift detection) | Thematic blocks identify natural topic boundaries |
+| **Context Copied** | All messages up to point X | Selective (by thematic blocks, by topic, by message range) | Multi-range block system enables surgical extraction |
+| **Organization** | Flat list of branches | Tree with ancestry paths, visual hierarchy | Materialized Path Pattern enables tree queries |
+| **Search Scope** | Per-conversation only | Cross-session semantic search | Vector database aggregates all conversations |
+| **Topic Awareness** | None (user must identify) | AI extracts topics, suggests branch points | Automated thematic block analysis |
+| **Template Reuse** | Manual copy-paste | Database-level branching with inventory integration | Inventory system + branching SQL queries |
+| **Context Precision** | Binary (all or nothing) | Message-pair granularity | Block ranges support interrupted discussions |
+
+**Key Insight:** Basic branching is a UX improvement over isolated sessions. Knowledge-graph branching is an architectural paradigm shift that enables knowledge management, not just conversation management.
+
+---
+
+### Architectural Comparison: Session Isolation vs. Context Preservation
+
+| Challenge | Conventional Session Architecture | Genesis Knowledge-Graph Architecture | Architectural Advantage |
+|-----------|----------------------------------|-------------------------------------|------------------------|
+| **Context Repetition** | New session = isolated context<br>User must manually repeat background<br>Effort: Significant manual repetition | Branching copies relevant context automatically<br>Database relationships preserve ancestry<br>Effort: Instant | Message relationships (parent_msg_id) enable selective context copying |
+| **Session Organization** | Flat list of sessions<br>No structural relationships<br>Navigation: Manual scrolling through list | Session tree with ancestry tracking<br>Visual hierarchy shows relationships<br>Navigation: Fast semantic search | Graph structure (ancestry_path) enables tree queries and relationship visualization |
+| **Topic Separation** | All messages or none<br>Cannot extract specific topics<br>Precision: Binary (keep all/start fresh) | Block-based selective branching<br>AI identifies topic boundaries<br>Precision: Message-pair granularity | Thematic blocks (multi-range support) enable surgical topic extraction |
+| **Template Sessions** | Manual copy-paste for each variant<br>Repetition: 3x for 3 variants<br>Consistency: Manual effort | Branch from established session<br>Repetition: 1x setup, 3x branch<br>Consistency: Guaranteed identical base | Database branching (COPY messages WHERE...) enables efficient template reuse |
+| **Lost Insights** | Manual search through session list<br>String matching only<br>Effort: Extensive manual scrolling | Cross-session semantic search<br>Vector embeddings find meaning<br>Effort: Instant semantic query | Vector database (ChromaDB) enables semantic similarity search across all sessions |
+
+---
+
+### USP 1: Context Preservation (Eliminating Manual Repetition)
+
+**Architectural Challenge:**
+
+In session-based architectures, sessions are isolated units. Starting a new session means the AI has no context from previous sessions. Users must manually repeat relevant background information.
+
+**Conventional Session Architecture:**
+```
+Session 1: [Topic A + Topic B mixed]
+User starts Session 2 to focus on Topic B
+
+Session 2 (isolated):
+User: "I need help with Topic B"
+AI: "What's the context?"
+User: [Manually repeats Topic A background - significant effort]
+```
+
+**Basic Branching Architecture:**
+```
+Session 1: [Topic A + Topic B mixed - 50 messages]
+User branches at message 25 to focus on Topic B
+
+New Branch:
+- Copies ALL messages 1-25 (includes Topic A pollution)
+- Cannot selectively copy only Topic B context
+- User must work around irrelevant Topic A content
+```
+
+**Knowledge-Graph Architecture:**
+```sql
+-- Genesis branching uses database relationships
+SELECT * FROM messages 
+WHERE session_id = 'session_1' 
+AND message_id <= 'branch_point'
+
+-- Automatically copies to new branch
+INSERT INTO messages (session_id, content, parent_msg_id)
+SELECT 'new_branch', content, message_id
+FROM previous_query
+
+-- OR selective topic-based branching:
+SELECT m.* FROM messages m
+JOIN block_ranges br ON m.message_id BETWEEN br.start_msg_id AND br.end_msg_id
+WHERE br.block_id IN (SELECT block_id FROM blocks WHERE topic = 'Topic B')
+```
+
+**Result:**
+- ✅ Zero manual repetition
+- ✅ AI has full context immediately
+- ✅ User continues productively
+- ✅ Selective context (topic-aware, not just linear)
+
+**Architectural Reason:** Database stores message relationships; conventional sessions are isolated units without cross-session references. Thematic blocks enable selective context copying beyond linear "all up to point X."
+
+**Efficiency Gain:** Eliminates manual context repetition entirely
+
+---
+
+### USP 2: Ancestry Tracking (Eliminating Session Chaos)
+
+**Architectural Challenge:**
+
+Session-based tools typically present sessions as a flat list. After months of use, users have dozens of sessions with no visible relationships. Finding related discussions requires manual memory and scrolling.
+
+**Conventional Session Architecture:**
+```
+Sessions (flat list):
+1. Project Setup
+2. Docker Config
+3. Authentication
+4. Database Design
+5. API Endpoints
+6. Docker Again (which relates to #2?)
+7. Auth Fix (which relates to #3?)
+...
+
+No structural relationships visible
+```
+
+**Knowledge-Graph Architecture:**
+```
+Sessions (tree structure):
+main (Project Setup)
+├── Docker Config
+│   └── Docker Optimization
+├── Authentication
+│   ├── JWT Implementation
+│   └── OAuth Alternative
+└── Database Design
+    ├── PostgreSQL Schema
+    └── MongoDB Alternative
+
+Ancestry path stored: "main/docker/optimization"
+```
+
+**Database Schema:**
+```sql
+CREATE TABLE sessions (
+    session_id TEXT PRIMARY KEY,
+    parent_session_id TEXT,
+    ancestry_path TEXT,  -- Materialized path
+    ancestry_depth INTEGER
+);
+
+-- Query: "Show all descendants of 'main'"
+SELECT * FROM sessions 
+WHERE ancestry_path LIKE 'main/%'
+ORDER BY ancestry_depth;
+```
+
+**Result:**
+- ✅ Clear structural relationships
+- ✅ Visual hierarchy in mindmap
+- ✅ Fast tree queries
+
+**Architectural Reason:** Materialized Path Pattern enables efficient hierarchical queries; flat session lists have no relationship metadata.
+
+**Efficiency Gain:** Fast hierarchical navigation vs. manual linear search
+
+---
+
+### USP 3: Selective Context (Eliminating Topic Pollution)
+
+**Architectural Challenge:**
+
+Conversations naturally evolve across multiple topics. In session-based tools, the choice is binary: keep all messages (polluted context) or start fresh (lose context). There's no way to extract specific topics.
+
+**Conventional Session Architecture:**
+```
+Session with 50 messages covering 3 topics:
+- Messages 1-15: Topic A
+- Messages 16-30: Topic B  
+- Messages 31-50: Topic C
+
+Options:
+1. New session with all 50 messages → Context pollution
+2. New session with no messages → Context loss
+3. Manual copy-paste relevant messages → Time-consuming, error-prone
+```
+
+**Knowledge-Graph Architecture:**
+```
+AI Analysis (Thematic Blocks):
+@blocks analyze
+
+Result:
+- Block "Topic A": Ranges [1-15, 45-50] (multi-range!)
+- Block "Topic B": Range [16-30]
+- Block "Topic C": Range [31-44]
+
+Selective Branching:
+@branch "Topic B Deep-Dive" with blocks [2]
+
+SQL Query:
+SELECT m.* FROM messages m
+JOIN block_ranges br ON m.message_id BETWEEN br.start_msg_id AND br.end_msg_id
+WHERE br.block_id = 'block_2'
+ORDER BY m.position;
+
+Result: New branch with ONLY Topic B messages (16-30)
+```
+
+**Result:**
+- ✅ Surgical topic extraction
+- ✅ Clean, focused context
+- ✅ No manual copy-paste
+
+**Architectural Reason:** Thematic blocks with multi-range support enable message-pair granularity; sessions are atomic units that cannot be subdivided.
+
+**Precision:** Message-pair level vs. session level
+
+---
+
+### USP 4: Template Sessions (Eliminating Redundant Setup)
+
+**Architectural Challenge:**
+
+When exploring multiple variants of a solution, users must repeat the same setup context for each variant. In session-based tools, this means manually repeating background information 3x for 3 variants.
+
+**Conventional Session Architecture:**
+```
+Scenario: Explore 3 frontend frameworks with same backend
+
+Session 1: React Variant
+User: [Repeats backend setup - significant effort]
+User: [Repeats requirements - significant effort]
+User: "Now with React frontend"
+
+Session 2: Vue Variant  
+User: [Repeats backend setup AGAIN - significant effort]
+User: [Repeats requirements AGAIN - significant effort]
+User: "Now with Vue frontend"
+
+Session 3: Svelte Variant
+User: [Repeats backend setup AGAIN - significant effort]
+...
+
+Total repetition: Massive (3x full setup)
+```
+
+**Knowledge-Graph Architecture:**
+```
+Main Session: Backend Setup (30 messages, perfectly established)
+
+@branch "React Frontend"
+@branch "Vue Frontend"
+@branch "Svelte Frontend"
+
+SQL:
+-- Each branch automatically copies base messages
+INSERT INTO messages (session_id, content, parent_msg_id)
+SELECT 'react_branch', content, message_id
+FROM messages
+WHERE session_id = 'main_session';
+
+Result:
+All 3 branches:
+- Identical backend context (messages 1-30)
+- Consistent starting point
+- Zero repetition
+- Parallel development
+```
+
+**Result:**
+- ✅ 1x setup, 3x branch
+- ✅ Guaranteed consistency
+- ✅ 2/3 work eliminated
+
+**Architectural Reason:** Database branching enables efficient copying; session-based tools lack template mechanisms.
+
+**Efficiency Gain:** Eliminates 2/3 of repetitive setup work
+
+---
+
+### USP 5: Cross-Session Search (Eliminating Manual Archaeology)
+
+**Architectural Challenge:**
+
+After months of AI conversations, users accumulate valuable insights scattered across dozens of sessions. In session-based tools, finding specific information requires manually opening and scrolling through sessions, hoping to remember which one contained the relevant discussion.
+
+**Conventional Session Architecture:**
+```
+User: "Where did I discuss making homemade pasta?"
+
+Process:
+1. Open Session 1 → Scroll → Not here
+2. Open Session 2 → Scroll → Not here
+3. Open Session 3 → Scroll → Not here
+...
+47. Open Session 47 → Scroll → Found it!
+
+Effort: Extensive manual session archaeology
+Search method: String matching only
+Result: Finds "pasta" but not "fresh noodles" or "Italian cooking"
+```
+
+**Basic Branching Architecture:**
+```
+User: "Where did I discuss making homemade pasta?"
+
+Process:
+1. Open conversation list
+2. String search "pasta" (if available)
+3. Results: 8 matches across 5 conversations
+4. Click through each to find relevant context
+
+Limitations:
+- String matching only (misses "fresh noodles", "Italian dough", "handmade pasta")
+- No cross-conversation aggregation
+- No semantic understanding
+- Must manually piece together insights
+```
+
+**Knowledge-Graph Architecture:**
+```
+User: @search "making homemade pasta" --scope all
+
+Database + Vector Search:
+1. Generate query embedding: model.encode("making homemade pasta")
+2. Search vector database:
+   SELECT m.*, 
+          vector_similarity(m.embedding, query_embedding) as score
+   FROM messages m
+   WHERE score > 0.75
+   ORDER BY score DESC;
+
+3. Aggregate by session:
+   - Session 12: 5 relevant message-pairs (score: 0.89)
+   - Session 34: 3 relevant message-pairs (score: 0.82)
+   - Session 47: 8 relevant message-pairs (score: 0.91)
+
+4. Display in mindmap with relevance tiers
+5. [Create Branch from Results] → Aggregated branch
+
+Effort: Instant semantic query
+Search method: Semantic similarity (finds "fresh noodles", "Italian dough", "handmade pasta", etc.)
+Result: Complete, structured, semantically connected
+```
+
+**Result:**
+- ✅ Instant vs. extensive manual search
+- ✅ Semantic understanding (not just string matching)
+- ✅ Aggregated results across all sessions
+- ✅ Create focused branch from results
+
+**Architectural Reason:** Vector database (ChromaDB) enables semantic search; session-based tools rely on string matching without cross-session aggregation.
+
+**Efficiency Gain:** Semantic search with instant aggregation vs. manual session archaeology
+
+---
+
+### USP 6: Prompt Template Management (Eliminating Repetitive Prompting)
+
+**Architectural Challenge:**
+
+Power users develop effective prompts for recurring tasks (code review, document critique, brainstorming frameworks). In session-based tools, these prompts must be manually retyped or copy-pasted from external notes, with no structured storage or versioning.
+
+**Conventional Session Architecture:**
+```
+User has effective code review prompt in external note-taking app
+
+Every code review:
+1. Open external app
+2. Find code review prompt
+3. Copy prompt
+4. Paste into session
+5. Manually adapt for current code
+6. Repeat for every review
+
+No versioning, no organization, no context-aware loading
+```
+
+**Knowledge-Graph Architecture:**
+```
+Create Template:
+@template create "Code Review - Security Focus"
+Content: "Review this code for security vulnerabilities. Focus on:
+1. Input validation
+2. Authentication/authorization
+3. SQL injection risks
+4. XSS vulnerabilities
+Provide specific line numbers and severity ratings."
+
+Storage:
+INSERT INTO inventory (item_type, title, content, tags)
+VALUES ('prompt_template', 'Code Review - Security', [...], 
+        ['code_review', 'security', 'template']);
+
+Usage:
+@template load "Code Review - Security"
+[Paste code here]
+
+Advanced:
+@template load "Code Review - Security" --context [block_id]
+→ Automatically includes relevant code context from block
+```
+
+**Features:**
+- ✅ Structured storage in inventory
+- ✅ Versioning (edit template, save as v2)
+- ✅ Tags for organization
+- ✅ Context-aware loading (can reference blocks/sessions)
+- ✅ Reusable across sessions
+- ✅ Searchable ("show all code review templates")
+
+**Result:**
+- ✅ No external note-taking needed
+- ✅ Consistent prompting
+- ✅ Version history
+- ✅ Context integration
+
+**Architectural Reason:** Inventory system (database table) enables structured storage, tagging, and versioning; session-based tools lack prompt management infrastructure.
+
+**Efficiency Gain:** Instant template loading with context integration vs. manual copy-paste workflow
+
+---
+
+### Architectural Summary
+
+**Why These USPs Require Knowledge-Graph Architecture:**
+
+| USP | Required Architecture | Why Sessions Can't Do This |
+|-----|----------------------|---------------------------|
+| Context Preservation | Message relationships (parent_msg_id) | Sessions are isolated units |
+| Ancestry Tracking | Materialized Path Pattern | Flat session lists have no hierarchy |
+| Selective Context | Thematic blocks + multi-range | Sessions are atomic (all or nothing) |
+| Template Sessions | Database branching (COPY WHERE...) | No template mechanism |
+| Cross-Session Search | Vector embeddings + aggregation | No cross-session query capability |
+| Prompt Templates | Inventory system (structured storage) | No prompt management infrastructure |
+
+**These are not "features that could be added" to session-based tools - they require fundamental architectural differences.**
+
+---
+
 ## 7. When to Use Each Architecture
 
 ### Architecture Selection Matrix
