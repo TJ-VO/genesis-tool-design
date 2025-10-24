@@ -9,8 +9,10 @@
 | Document | Description | Target Audience |
 |----------|-------------|-----------------|
 | [README.md](README.md) | **Main entry point.** Complete design & vision specification. | Everyone |
-| [quality-philosophy.md](quality-philosophy.md) | Why "quality over quantity" matters. Psychological foundations, curation philosophy. | Product Managers, Users |
-| [design-philosophy.md](design-philosophy.md) | Design approach: scalability, future potential, vision unconstrained by current limitations. | Architects, Designers |
+| [philosophy/](philosophy/) | **Philosophical foundations.** Three pillars: Cognitive, Quality, Design. | Everyone |
+| [philosophy/cognitive-philosophy.md](philosophy/cognitive-philosophy.md) | Why externalizing reasoning changes humanity. Democratization imperative. | Philosophers, Educators, Policy-Makers |
+| [philosophy/quality-philosophy.md](philosophy/quality-philosophy.md) | Why "quality over quantity" matters. Psychological foundations, curation philosophy. | Product Managers, Users |
+| [philosophy/design-philosophy.md](philosophy/design-philosophy.md) | Design approach: scalability, future potential, vision unconstrained by current limitations. | Architects, Designers |
 
 ---
 
@@ -81,16 +83,16 @@
 ### For Developers
 1. Start with [code-samples.md](code-samples.md) - See code examples from Backend MVP
 2. Read [competitive-differentiation.md](competitive-differentiation.md) - Understand architectural paradigm
-3. Check [design-philosophy.md](design-philosophy.md) - Design approach
+3. Check [philosophy/design-philosophy.md](philosophy/design-philosophy.md) - Design approach
 
 ### For Investors
 1. Start with [README.md](README.md) - Complete design & vision specification
 2. Read [competitive-differentiation.md](competitive-differentiation.md) - Market positioning
-3. Check [quality-philosophy.md](quality-philosophy.md) - Quality-first approach
+3. Check [philosophy/](philosophy/) - Philosophical foundations
 
 ### For End Users
 1. Start with [README.md](README.md) - Vision and use cases
-2. Read [quality-philosophy.md](quality-philosophy.md) - Why Genesis-Tool matters
+2. Read [philosophy/quality-philosophy.md](philosophy/quality-philosophy.md) - Why Genesis-Tool matters
 3. Explore [features/06-future/education-use-case.md](features/06-future/education-use-case.md) - Real-world example
 
 ### For UI/UX Designers

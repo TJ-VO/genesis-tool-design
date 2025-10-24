@@ -153,7 +153,7 @@ features/
 ## 🔗 Learn More
 
 - **Main Documentation:** [../README.md](../README.md)
-- **Design Philosophy:** [../design-philosophy.md](../design-philosophy.md)
+- **Philosophy:** [../philosophy/](../philosophy/) - Cognitive, Quality, and Design philosophies
 
 ---
 

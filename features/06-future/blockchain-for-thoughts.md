@@ -479,7 +479,7 @@ Blockchain for Thoughts solves a fundamental problem: **How to share knowledge f
 - **[Collaborative Knowledge Network](collaborative-knowledge-network.md)** – The broader vision (Publish Deck, Global Wiki)
 - **[Education Use Case](education-use-case.md)** – How students benefit from anonymous peer-reviewed learning
 - **[Architecture Overview](../01-architecture/overview.md)** – The 3-layer architecture (including Community Deck)
-- **[Quality Philosophy](../../quality-philosophy.md)** – Why Genesis-Tool values quality over quantity
+- **[Quality Philosophy](../../philosophy/quality-philosophy.md)** – Why Genesis-Tool values quality over quantity
 
 ---
 

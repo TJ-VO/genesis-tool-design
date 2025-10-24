@@ -216,11 +216,12 @@ This represents a **different approach** to AI interaction, focusing on structur
 
 ## Explore the Full Documentation
 
-This README provides a high-level overview. For detailed specifications, use cases, and technical deep-dives, see the complete documentation index:
+This README provides a high-level overview. For detailed specifications, use cases, and technical deep-dives, see the complete documentation:
 
 **[➡️ Full Documentation Index](./index.md)**
 
 The index is organized by audience (Developers, Investors, Designers, End Users) and includes:
+- **[Philosophy](./philosophy/)** – Why Genesis-Tool exists (Cognitive, Quality, Design)
 - Detailed architecture specifications
 - UI/UX feature designs
 - Real-world use cases and workflows

@@ -62,13 +62,13 @@ Important caveats:
 
 ### Why Design for Scalability?
 
-**The Challenge:** Should we design features based on current computational costs, or based on human needs?
+**The Challenge:** Should we design features based on current computational costs, or based on human intellectual needs?
 
-**Genesis-Tool's Answer:** Design for human needs. Build an architecture that scales gracefully as technology improves.
+**Genesis-Tool's Answer:** Design for human intellectual needs. Build an architecture that scales gracefully as technology improves.
 
 ### Example: Multi-Agent Document Review
 
-**Human Need:** Comprehensive document review from multiple perspectives (methodology, structure, content, style, etc.)
+**Human Intellectual Need:** Comprehensive document review from multiple perspectives (methodology, structure, content, style, etc.)
 
 **Current Constraint:** Running 5-10 specialized AI agents is computationally expensive
 
@@ -98,7 +98,7 @@ Design Principle: Tiered Complexity
 The architecture supports all tiers. Users choose based on their needs and available resources.
 ```
 
-**Key Insight:** The design doesn't limit itself to "what's cheap today." It enables "what humans need" and scales as technology improves.
+**Key Insight:** The design doesn't limit itself to "what's cheap today." It enables "what humans intellectually need" and scales as technology improves.
 
 ---
 
@@ -291,11 +291,13 @@ Like spell-check today, but for factual accuracy, logical consistency, and reade
 
 ## The Meta-Principle
 
-**Technology advances exponentially, but human needs remain constant.**
+**Technology advances exponentially, but human intellectual needs remain constant.**
 
-Genesis-Tool's design is built on **human needs** (preparation, understanding, quality), not current **technical constraints** (cost, speed, model limitations).
+Genesis-Tool's design is built on **human intellectual needs** (preparation, understanding, quality, logical analysis), not current **technical constraints** (cost, speed, model limitations).
 
-As technology advances, Genesis-Tool's design becomes increasingly achievable—but the design itself remains constant because it's rooted in timeless human needs.
+**Note:** Genesis-Tool focuses specifically on intellectual/cognitive work (research, analysis, documentation, decision-making). Other human needs and qualities—emotional support, empathy, intuition, common sense, feelings of joy and connection—remain fundamentally human domains where AI serves at best as a complement, not a replacement.
+
+As technology advances, Genesis-Tool's design becomes increasingly achievable—but the design itself remains constant because it's rooted in timeless human intellectual needs.
 
 ---
 
@@ -303,7 +305,7 @@ As technology advances, Genesis-Tool's design becomes increasingly achievable—
 
 Genesis-Tool's design philosophy follows a scalability-first approach:
 
-1. **Identify human needs** (comprehensive review, multi-scenario planning, etc.)
+1. **Identify human intellectual needs** (comprehensive review, multi-scenario planning, etc.)
 2. **Design architecture** that supports these needs at multiple scales
 3. **Enable graceful scaling** from basic to comprehensive
 4. **Prepare for future** where advanced features become accessible
