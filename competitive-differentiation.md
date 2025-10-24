@@ -565,17 +565,19 @@ Result: Fast, complete, structured, semantically connected
 Result: Very time-consuming if rewriting, history lost or messy
 ```
 
-**Ephemeral Chat Approach (with manual branching):**
+**Ephemeral Chat Approach (with basic branching):**
 ```
-1. Navigate to msg_42
-2. Click "Branch from here" (manual action required)
-3. System creates new branch
-4. User must manually switch to new branch
-5. Edit message in new branch
-6. Generate new AI response
-7. User must remember: "Which branch was which?"
+1. Navigate to target message
+2. User initiates branch creation (UI varies by implementation)
+3. ✅ New branch created automatically
+4. ✅ All messages up to branch point copied automatically
+5. ✅ Original conversation preserved
+6. Edit message in new branch
+7. Generate new AI response
+8. ⚠️ Organization: Can become cluttered with multiple branches
+9. ⚠️ Scope: Branches remain within this conversation tree only
 
-Result: History preserved, but manual overhead and effort required
+Result: History preserved, intuitive UI, but conversation-scoped (no cross-conversation reuse)
 ```
 
 **Document Platform Approach:**
@@ -694,18 +696,26 @@ For concrete user scenarios demonstrating these architectural differences, see [
 **What Basic Branching Provides:**
 
 Conventional branching (as seen in modern AI chat tools) allows users to:
-- Click on any message in a conversation
+- Select any message in a conversation
 - Create a new thread that copies all messages up to that point
 - Preserve the original conversation
+- Navigate branches via UI (implementation varies)
+
+**Strengths of Basic Branching:**
+- ✅ Intuitive UI (varies by implementation)
+- ✅ Full conversation history preserved
+- ✅ No manual copy-paste required
+- ✅ Parallel exploration within a conversation
 
 **What Basic Branching Lacks:**
 
 | Limitation | Impact | Why It Matters |
 |------------|--------|----------------|
+| **Conversation-scoped only** | Branches remain within their conversation tree | Cannot aggregate related discussions from different conversation trees |
 | **Linear copying only** | Must copy ALL messages up to point X | Cannot extract specific topics from mixed conversations |
 | **No topic awareness** | User manually identifies branch points | Misses natural topic boundaries, creates awkward splits |
-| **Flat organization** | Branches shown as list | No visual hierarchy, hard to navigate after multiple branches |
-| **No cross-session capability** | Each conversation isolated | Cannot aggregate related discussions from different sessions |
+| **Organization challenges** | Branches can become cluttered | No structured tree, hard to navigate after multiple branches |
+| **No cross-conversation reuse** | Cannot export knowledge artifacts to other conversations | Cannot reuse topic blocks or summaries in different conversation trees |
 | **String search only** | Finds exact text matches | Misses semantically related content with different terminology |
 | **No template mechanism** | Manual copy-paste for reuse | Repetitive setup for similar scenarios |
 
@@ -713,15 +723,17 @@ Conventional branching (as seen in modern AI chat tools) allows users to:
 
 | Feature | Basic Branching | Genesis Knowledge-Graph Branching | Architectural Reason |
 |---------|-----------------|-----------------------------------|---------------------|
+| **Conversation Scope** | Conversation-scoped (branches within one tree) | Cross-conversation knowledge composition | Inventory system enables knowledge persistence |
 | **Branch Point Selection** | Manual only (click message) | Manual OR AI-suggested (topic shift detection) | Thematic blocks identify natural topic boundaries |
-| **Context Copied** | All messages up to point X | Selective (by thematic blocks, by topic, by message range) | Multi-range block system enables surgical extraction |
-| **Organization** | Flat list of branches | Tree with ancestry paths, visual hierarchy | Materialized Path Pattern enables tree queries |
-| **Search Scope** | Per-conversation only | Cross-session semantic search | Vector database aggregates all conversations |
+| **Context Copied** | All messages up to point X | Selective (by thematic blocks, by topic, by message range, or 0-N Q&A pairs) | Multi-range block system enables surgical extraction |
+| **Organization** | Flat list (can become cluttered) | Tree with ancestry paths, visual hierarchy | Materialized Path Pattern enables tree queries |
+| **Search Scope** | Per-conversation only | Cross-conversation semantic search | Vector database aggregates all conversations |
 | **Topic Awareness** | None (user must identify) | AI extracts topics, suggests branch points | Automated thematic block analysis |
+| **Cross-Conversation Reuse** | Cannot export to other conversations | Export blocks/summaries to inventory, load in any conversation | Inventory system enables persistent knowledge artifacts |
 | **Template Reuse** | Manual copy-paste | Database-level branching with inventory integration | Inventory system + branching SQL queries |
-| **Context Precision** | Binary (all or nothing) | Message-pair granularity | Block ranges support interrupted discussions |
+| **Context Precision** | Binary (all or nothing) | Message-pair granularity (0-N pairs, or topic-based) | Block ranges support interrupted discussions |
 
-**Key Insight:** Basic branching is a UX improvement over isolated sessions. Knowledge-graph branching is an architectural paradigm shift that enables knowledge management, not just conversation management.
+**Key Insight:** Basic branching is a valuable UX improvement over isolated sessions—it validates the market need for non-linear interfaces. Knowledge-graph branching is an architectural paradigm shift that enables persistent knowledge management across conversation trees, not just conversation management within a single tree.
 
 ---
 
@@ -757,12 +769,15 @@ User: [Manually repeats Topic A background - significant effort]
 **Basic Branching Architecture:**
 ```
 Session 1: [Topic A + Topic B mixed - 50 messages]
-User branches at message 25 to focus on Topic B
+User initiates branch at message 25
 
 New Branch:
-- Copies ALL messages 1-25 (includes Topic A pollution)
-- Cannot selectively copy only Topic B context
-- User must work around irrelevant Topic A content
+- ✅ Copies ALL messages 1-25 automatically
+- ✅ Opens in new view (implementation varies)
+- ✅ Original conversation preserved
+- ⚠️ Includes Topic A pollution (cannot selectively copy only Topic B)
+- ⚠️ Branches remain within this conversation tree (no cross-conversation reuse)
+- ⚠️ Can become cluttered with multiple branches
 ```
 
 **Knowledge-Graph Architecture:**
