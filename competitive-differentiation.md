@@ -1,4 +1,4 @@
-# Architectural Differentiation & Design Philosophy
+# Architectural Differentiation
 
 **Important:** This document describes **architectural paradigms and design patterns**, not specific products or services. The paradigms described represent generalized architectural approaches observed across the industry. Any similarities to existing tools are for illustrative purposes only to explain different architectural approaches. Product and company names may be trademarks of their respective holders. See [DISCLAIMER.md](DISCLAIMER.md) for complete trademark information and limitations of liability.
 
