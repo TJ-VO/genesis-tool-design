@@ -62,6 +62,47 @@ Technology advances exponentially, but human intellectual needs remain constant.
 
 ---
 
+## Deep Dives: Technical Philosophy
+
+### 4. [Context as Identity](context-as-identity.md)
+**How context structure shapes AI behavior**
+
+AI's "identity" in a conversation is determined by context structure, not just content. This has profound implications for how we design AI collaboration tools.
+
+**Key insights:**
+- Participant vs. Observer modes
+- Context as AI's "working memory"
+- Cognitive sovereignty through user control
+- Empirical basis: Transformer attention mechanisms
+
+---
+
+### 5. [Temporal Asymmetry](temporal-asymmetry.md)
+**Why AI and humans experience "time" differently**
+
+Humans experience continuous time; AI experiences discrete processing. Both perspectives are valid—but incompatible. Genesis-Tool bridges this asymmetry.
+
+**Key insights:**
+- Continuity is perspective-dependent
+- Context as continuity bridge
+- Branching as temporal exploration
+- Cross-session persistence strategies
+
+---
+
+### 6. [Knowledge as Lazy Loading](knowledge-as-lazy-loading.md)
+**How selective attention shapes cognition**
+
+Both brains and computers use "lazy loading"—processing only what's needed. This universal optimization strategy underlies Genesis-Tool's context management.
+
+**Key insights:**
+- Neuroscience of selective attention
+- Lazy loading in computer science
+- Quantum analogy (observer effect)
+- Thematic Blocks as attention-based segmentation
+
+---
+
 ## How They Connect
 
 ```
@@ -79,6 +120,11 @@ Design Philosophy (HOW Genesis scales)
     ↓
     Scalable architecture that grows with
     technological advancement
+    ↓
+Technical Philosophy (HOW AI cognition works)
+    ↓
+    Context as Identity + Temporal Asymmetry + Lazy Loading
+    inform Genesis-Tool's architecture
 ```
 
 ---
@@ -98,12 +144,18 @@ Design Philosophy (HOW Genesis scales)
 
 **If you're a developer:**
 - Start with [Design Philosophy](design-philosophy.md) to understand the architectural principles
+- Then explore [Context as Identity](context-as-identity.md) and [Temporal Asymmetry](temporal-asymmetry.md) for technical depth
 
 **If you're a philosopher, educator, or policy-maker:**
 - Start with [Cognitive Philosophy](cognitive-philosophy.md) to understand the societal implications
+- Then explore [Knowledge as Lazy Loading](knowledge-as-lazy-loading.md) for cognitive science connections
+
+**If you're an AI researcher or cognitive scientist:**
+- Start with [Context as Identity](context-as-identity.md), [Temporal Asymmetry](temporal-asymmetry.md), and [Knowledge as Lazy Loading](knowledge-as-lazy-loading.md)
+- These explore the technical and philosophical foundations of AI-human collaboration
 
 **If you're an investor or partner:**
-- Read all three to understand the complete vision
+- Read all six to understand the complete vision
 
 ---
 

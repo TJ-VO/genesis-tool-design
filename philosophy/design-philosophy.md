@@ -37,7 +37,7 @@ Observed historical pattern: 100-1000x cost reduction per decade
 
 ### AI Costs May Follow Similar Trajectories (Speculative)
 
-**Disclaimer:** The following projections are speculative and based on extrapolation from historical computing trends. AI-specific factors (model training costs, energy requirements, regulatory constraints, market dynamics) may differ significantly from general computing cost curves. These are illustrative scenarios to demonstrate the design philosophy, not predictions or guarantees. Actual AI cost trajectories may vary substantially and could be affected by factors not present in historical computing trends.
+**Disclaimer:** These projections are speculative, based on historical computing trends. AI-specific factors may differ significantly. Illustrative scenarios only, not predictions.
 
 ```
 Current State (October 2025):
